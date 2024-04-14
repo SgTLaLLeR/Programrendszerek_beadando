@@ -16,13 +16,12 @@ const zod_2 = require("../services/zod");
 function handleErrors(err, _req, res, _next) {
     return __awaiter(this, void 0, void 0, function* () {
         const statusMessageMapping = {
-            PrismaClientRustPanicError: { status: http_status_codes_1.HTTP_STATUS_UNAUTHORIZED, message: 'Invalid username or password' },
             PrismaClientInitializationError: { status: http_status_codes_1.HTTP_STATUS_INTERNAL_SERVER_ERROR, message: 'Cannot connect to the database' },
             ZodError: { status: http_status_codes_1.HTTP_STATUS_BAD_REQUEST, message: '' },
-            TokenExpiredError: { status: http_status_codes_1.HTTP_STATUS_FORBIDDEN, message: '' },
-            JsonWebTokenError: { status: http_status_codes_1.HTTP_STATUS_FORBIDDEN, message: '' },
-            MenuNotFound: { status: http_status_codes_1.HTTP_STATUS_NOT_FOUND, message: '' },
             UserNotFound: { status: http_status_codes_1.HTTP_STATUS_UNAUTHORIZED, message: '' },
+            IncorrectPassword: { status: http_status_codes_1.HTTP_STATUS_UNAUTHORIZED, message: '' },
+            EmailAlreadyExist: { status: http_status_codes_1.HTTP_STATUS_BAD_REQUEST, message: '' },
+            UsernameAlreadyExist: { status: http_status_codes_1.HTTP_STATUS_BAD_REQUEST, message: '' },
             RefreshError: { status: http_status_codes_1.HTTP_STATUS_FORBIDDEN, message: '' }
         };
         const statusMessage = statusMessageMapping[err.constructor.name];
