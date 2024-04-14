@@ -6,11 +6,12 @@ import {HTTP_STATUS_OK} from "../constans/http-status-codes";
 
 
 
+
 // Public endpoints
 const userRouter = express.Router();
 // Protected endpoints
 const protectedUserRouter = express.Router();
-userRouter.post('/login', async (req: Request, res: Response, next : NextFunction) => {
+userRouter.post('/login' ,async (req: Request, res: Response, next : NextFunction) => {
 
     try {
         const validData= await zParse(UserLoginDTOInput,req.body);
@@ -40,7 +41,7 @@ protectedUserRouter.get('/logout', async (req: Request, res : Response, next : N
     return res.status(HTTP_STATUS_OK).json('OK');
 });
 
-protectedUserRouter.post('/profile',async (_req: Request, res: Response)=>{
+userRouter.post('/profile',async (_req: Request, res: Response)=>{
     return res.status(HTTP_STATUS_OK).json('OK');
 
 

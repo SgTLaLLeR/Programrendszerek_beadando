@@ -70,6 +70,6 @@ userRouter.post('/register', (req, res, next) => __awaiter(void 0, void 0, void 
 protectedUserRouter.get('/logout', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     return res.status(http_status_codes_1.HTTP_STATUS_OK).json('OK');
 }));
-protectedUserRouter.post('/profile', (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
+userRouter.post('/profile', (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     return res.status(http_status_codes_1.HTTP_STATUS_OK).json('OK');
 }));

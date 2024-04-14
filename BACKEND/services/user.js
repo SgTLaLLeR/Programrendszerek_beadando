@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.registerHelper = exports.registerUser = exports.loginUser = void 0;
+exports.findUserById = exports.registerHelper = exports.registerUser = exports.loginUser = void 0;
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const client_1 = require("@prisma/client");
 const zod_1 = require("./zod");
@@ -33,13 +33,13 @@ function loginUser(userInput) {
             throw new user_not_found_1.UserNotFound(userInput.name);
         }
         const passwordMatch = yield bcrypt_1.default.compare(userInput.pw, user.password);
-        console.log(passwordMatch);
         if (!passwordMatch) {
             throw new incorrect_password_1.IncorrectPassword();
         }
-        return (0, zod_1.zParse)(user_login_1.UserLoginDTOSucces, {
-            message: 'Login Success',
-        });
+        // return zParse(UserLoginDTOSucces, {
+        //     message: 'Login Success',
+        // });
+        return user;
     });
 }
 exports.loginUser = loginUser;
@@ -83,3 +83,19 @@ function registerHelper(username, email) {
     });
 }
 exports.registerHelper = registerHelper;
+function findUserById(id) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const user = yield prisma.users.findFirst({
+            where: {
+                id: id
+            }
+        });
+        if (user) {
+            return (0, zod_1.zParse)(user_login_1.UserLoginDTOSucces, {
+                message: user.id
+            });
+        }
+        return user_not_found_1.UserNotFound;
+    });
+}
+exports.findUserById = findUserById;

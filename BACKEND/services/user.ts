@@ -26,14 +26,15 @@ export async function loginUser(userInput: ZUserLoginDTOInput) {
     }
 
     const passwordMatch = await bcrypt.compare(userInput.pw, user.password);
-    console.log(passwordMatch);
+
     if (!passwordMatch) {
         throw new IncorrectPassword();
     }
 
-    return zParse(UserLoginDTOSucces, {
-        message: 'Login Success',
-    });
+    // return zParse(UserLoginDTOSucces, {
+    //     message: 'Login Success',
+    // });
+    return user;
 }
 
 export async function registerUser(userInput: ZUserRegisterDTOInput) {
@@ -76,4 +77,19 @@ export async function registerHelper(username: string, email: string) {
     if (existingNameUser) {
         throw new UsernameAlreadyExist();
     }
+}
+
+
+export async function  findUserById(id : string){
+    const user = await prisma.users.findFirst({
+        where: {
+            id:id
+        }
+    })
+    if(user){
+        return zParse(UserLoginDTOSucces,{
+            message: user.id
+        })
+    }
+    return UserNotFound;
 }
