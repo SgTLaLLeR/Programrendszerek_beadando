@@ -1,52 +1,18 @@
 import express, {Request, Response} from 'express';
-import {userRouter} from './routes/user';
+import {protectedUserRouter, userRouter} from './routes/user';
 import {handleErrors} from "./middlewares/error-handler";
 import {Logger} from "./middlewares/log-to-console";
 import cookieParser from 'cookie-parser';
-import passport from 'passport';
 import session from 'express-session';
-import {ZUserLoginDTOInput} from "./dtos/user-login";
-import {findUserById, loginUser} from "./services/user";
-import { Strategy as LocalStrategy } from 'passport-local';
-
+import {ensureAuthenticated} from "./middlewares/auth";
+import passport from '../BACKEND/passport/passport-config';
 
 const port=8000;
 const app = express();
 const HTTP_PORT=port;
 
-passport.use( new LocalStrategy(
-    {
-        usernameField: 'name',
-        passwordField: 'pw'
-    },
-    async (username, password, done) => {
-        try {
-            const userInput: ZUserLoginDTOInput = {name: username, pw: password};
-            const user = await loginUser(userInput);
-            done(null, user);
-        } catch (err) {
-            done(err);
-        }
-    }
-));
-
-passport.serializeUser((user: any, done) => {
-    done(null, user.id);
-});
-
-passport.deserializeUser((id: any, done) => {
-    findUserById(id)
-        .then(user => {
-            done(null, user);
-        })
-        .catch(err => {
-            done(err);
-        })
-});
-
 app.use(express.json(), Logger);
 app.use(express.urlencoded({ extended: false }));
-
 
 app.use(cookieParser());
 app.use(session({
@@ -58,22 +24,31 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-
-app.listen(HTTP_PORT, () => {
+const server=app.listen(HTTP_PORT, () => {
     console.log("Server is listening on port " + HTTP_PORT);
 });
-
+//public endpoints
 app.use('/user', userRouter);
+
+//protected endpoints
+app.use('/protected/user',ensureAuthenticated,protectedUserRouter);
+
 
 app.get('/', (_req: Request, res: Response) => {
     return res.status(200).json('Check postman for guidance');
 });
 
 
-app.post('/login', passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/login'
-}));
+
+process.on('SIGINT', () => {
+    console.log("Received SIGINT. Shutting down gracefully...");
+    server.close(err => {
+        if (err) {
+            console.error(err);
+            process.exit(1);
+        }
+        process.exit(0);
+    });
+});
 
 app.use(handleErrors);

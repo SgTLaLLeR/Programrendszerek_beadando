@@ -41,21 +41,16 @@ const zod_1 = require("../services/zod");
 const userService = __importStar(require("../services/user"));
 const user_login_1 = require("../dtos/user-login");
 const http_status_codes_1 = require("../constans/http-status-codes");
+const passport_config_1 = __importDefault(require("../passport/passport-config"));
 // Public endpoints
 const userRouter = express_1.default.Router();
 exports.userRouter = userRouter;
 // Protected endpoints
 const protectedUserRouter = express_1.default.Router();
 exports.protectedUserRouter = protectedUserRouter;
-userRouter.post('/login', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const validData = yield (0, zod_1.zParse)(user_login_1.UserLoginDTOInput, req.body);
-        const body = yield userService.loginUser(validData);
-        return res.status(http_status_codes_1.HTTP_STATUS_OK).json(body);
-    }
-    catch (err) {
-        next(err);
-    }
+userRouter.post('/login', passport_config_1.default.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/login'
 }));
 userRouter.post('/register', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -70,6 +65,6 @@ userRouter.post('/register', (req, res, next) => __awaiter(void 0, void 0, void 
 protectedUserRouter.get('/logout', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     return res.status(http_status_codes_1.HTTP_STATUS_OK).json('OK');
 }));
-userRouter.post('/profile', (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
+protectedUserRouter.post('/profile', (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     return res.status(http_status_codes_1.HTTP_STATUS_OK).json('OK');
 }));
