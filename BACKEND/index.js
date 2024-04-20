@@ -11,6 +11,7 @@ const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const express_session_1 = __importDefault(require("express-session"));
 const auth_1 = require("./middlewares/auth");
 const passport_config_1 = __importDefault(require("../BACKEND/passport/passport-config"));
+const product_1 = require("./routes/product");
 const port = 8000;
 const app = (0, express_1.default)();
 const HTTP_PORT = port;
@@ -29,8 +30,10 @@ const server = app.listen(HTTP_PORT, () => {
 });
 //public endpoints
 app.use('/user', user_1.userRouter);
+app.use('/product', product_1.productRouter);
 //protected endpoints
 app.use('/protected/user', auth_1.ensureAuthenticated, user_1.protectedUserRouter);
+app.use('/protected/product', auth_1.ensureAuthenticated, product_1.protectedProductRouter);
 app.get('/', (_req, res) => {
     return res.status(200).json('Check postman for guidance');
 });

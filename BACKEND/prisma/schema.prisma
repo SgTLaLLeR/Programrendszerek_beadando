@@ -13,3 +13,20 @@ model Users {
   name     String
   password String
 }
+
+model Products {
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  description String
+  price Int
+  isAvailable Boolean
+  userId String
+}
+
+model file {
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  filename String
+  path String
+  userId String
+  productId String?
+}

@@ -33,6 +33,5 @@ export const UserLoginDTOSucces= z.object({
 })
 
 export type ZUserLoginDTOInput = z.infer<typeof UserLoginDTOInput>;
-export type ZUserLoginDTOSucces = z.infer<typeof UserLoginDTOSucces>
 export type ZUserRegisterDTOInput = z.infer<typeof UserRegisterDTOInput>
 

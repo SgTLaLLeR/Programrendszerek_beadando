@@ -6,10 +6,16 @@ import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import {ensureAuthenticated} from "./middlewares/auth";
 import passport from '../BACKEND/passport/passport-config';
+import {productRouter, protectedProductRouter} from "./routes/product";
+
+
+
+
 
 const port=8000;
 const app = express();
 const HTTP_PORT=port;
+
 
 app.use(express.json(), Logger);
 app.use(express.urlencoded({ extended: false }));
@@ -29,9 +35,11 @@ const server=app.listen(HTTP_PORT, () => {
 });
 //public endpoints
 app.use('/user', userRouter);
+app.use('/product', productRouter)
 
 //protected endpoints
 app.use('/protected/user',ensureAuthenticated,protectedUserRouter);
+app.use('/protected/product', ensureAuthenticated,protectedProductRouter);
 
 
 app.get('/', (_req: Request, res: Response) => {

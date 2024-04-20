@@ -65,6 +65,16 @@ userRouter.post('/register', (req, res, next) => __awaiter(void 0, void 0, void 
 protectedUserRouter.get('/logout', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     return res.status(http_status_codes_1.HTTP_STATUS_OK).json('OK');
 }));
-protectedUserRouter.post('/profile', (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
+protectedUserRouter.post('/profile', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(req.user);
     return res.status(http_status_codes_1.HTTP_STATUS_OK).json('OK');
+}));
+userRouter.post('/findById', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const user = yield userService.findUserById(req.body.id);
+        return res.status(http_status_codes_1.HTTP_STATUS_OK).json(user);
+    }
+    catch (e) {
+        next(e);
+    }
 }));

@@ -3,7 +3,7 @@ import {PrismaClient} from '@prisma/client'
 import {zParse} from "./zod";
 
 import {
-    ZUserLoginDTOInput, UserLoginDTOSucces, ZUserRegisterDTOInput,
+    ZUserLoginDTOInput, UserLoginDTOSucces, ZUserRegisterDTOInput, UserLoginDTOInput,
 } from "../dtos/user-login";
 import {UserNotFound} from "../errors/user-not-found";
 import {IncorrectPassword} from "../errors/incorrect-password";
@@ -87,9 +87,7 @@ export async function  findUserById(id : string){
         }
     })
     if(user){
-        return zParse(UserLoginDTOSucces,{
-            message: user.id
-        })
+        return user;
     }
     return UserNotFound;
 }

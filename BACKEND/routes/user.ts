@@ -1,7 +1,7 @@
 import express, {NextFunction, Request, Response} from 'express';
 import {zParse} from "../services/zod";
 import * as userService from "../services/user";
-import {UserLoginDTOInput, UserRegisterDTOInput} from "../dtos/user-login";
+import {UserRegisterDTOInput} from "../dtos/user-login";
 import {HTTP_STATUS_OK} from "../constans/http-status-codes";
 import passport from "../passport/passport-config";
 
@@ -36,10 +36,21 @@ protectedUserRouter.get('/logout', async (req: Request, res : Response, next : N
     return res.status(HTTP_STATUS_OK).json('OK');
 });
 
-protectedUserRouter.post('/profile',async (_req: Request, res: Response)=>{
+protectedUserRouter.post('/profile',async (req: Request, res: Response)=>{
+    console.log(req.user)
     return res.status(HTTP_STATUS_OK).json('OK');
 
 
 });
+
+userRouter.post('/findById', async (req: Request, res: Response, next : NextFunction)=>{
+    try {
+        const user = await userService.findUserById(req.body.id);
+        return res.status(HTTP_STATUS_OK).json(user);
+    } catch (e){
+        next (e);
+    }
+
+})
 
 export { userRouter, protectedUserRouter };

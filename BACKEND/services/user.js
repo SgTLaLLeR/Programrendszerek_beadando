@@ -91,9 +91,7 @@ function findUserById(id) {
             }
         });
         if (user) {
-            return (0, zod_1.zParse)(user_login_1.UserLoginDTOSucces, {
-                message: user.id
-            });
+            return user;
         }
         return user_not_found_1.UserNotFound;
     });
