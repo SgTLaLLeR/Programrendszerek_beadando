@@ -5,6 +5,7 @@ import * as productService from "../services/product";
 import multer from "multer";
 import {FileDTOInput} from "../dtos/file";
 import {saveFileToDb} from "../services/file-upload";
+import {ProductFilterDTOInput} from "../dtos/product";
 
 declare global {
     namespace Express {
@@ -30,18 +31,38 @@ productRouter.post('/getAllProduct', async (_req: Request, res: Response, next: 
     }
 
 })
+productRouter.post('/getAllProductImage', async (_req: Request, res: Response, next: NextFunction) => {
+    try {
+        const result = await productService.getAllProductImage();
+        return res.status(HTTP_STATUS_OK).json(result);
+
+    } catch (e) {
+        next (e);
+    }
+})
+
+productRouter.post('/getFilteredProduct', async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const validData = await zParse(ProductFilterDTOInput, req.body);
+        const result = await productService.getFilteredProducts(validData);
+        return res.status(HTTP_STATUS_OK).json(result);
+
+    } catch (e){
+        next(e);
+    }
+})
 
 protectedProductRouter.post('/createProduct', upload.single('file'), async (req: Request, res: Response, next)=>{
     try {
         const file =await zParse(FileDTOInput, req.file);
         //TODO majd kitörölni élesben
         const dummy  = {
-
-            name : "Kocsi",
-            description: "Komoly auto elado",
-            price : 1004500,
-            isAvailable: true,
-            userId: "asdqweasd"
+                name: "Próba Másik",
+                description: "Új telefon eladó",
+                price: 19000,
+                isAvailable: false,
+                uploadedAt: new Date(),
+                userId: "zxcvbnm"
         }
 
         //const validData = await zParse(ProductDTOInput, req.body);

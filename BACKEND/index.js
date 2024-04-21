@@ -12,9 +12,15 @@ const express_session_1 = __importDefault(require("express-session"));
 const auth_1 = require("./middlewares/auth");
 const passport_config_1 = __importDefault(require("../BACKEND/passport/passport-config"));
 const product_1 = require("./routes/product");
+const cors_1 = __importDefault(require("cors"));
 const port = 8000;
 const app = (0, express_1.default)();
 const HTTP_PORT = port;
+const corsOptions = {
+    origin: 'http://localhost:4200',
+    optionsSuccessStatus: 200
+};
+app.use((0, cors_1.default)(corsOptions));
 app.use(express_1.default.json(), log_to_console_1.Logger);
 app.use(express_1.default.urlencoded({ extended: false }));
 app.use((0, cookie_parser_1.default)());
@@ -34,6 +40,7 @@ app.use('/product', product_1.productRouter);
 //protected endpoints
 app.use('/protected/user', auth_1.ensureAuthenticated, user_1.protectedUserRouter);
 app.use('/protected/product', auth_1.ensureAuthenticated, product_1.protectedProductRouter);
+app.use('/uploads', express_1.default.static('uploads'));
 app.get('/', (_req, res) => {
     return res.status(200).json('Check postman for guidance');
 });

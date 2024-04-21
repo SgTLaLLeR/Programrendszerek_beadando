@@ -7,7 +7,7 @@ import session from 'express-session';
 import {ensureAuthenticated} from "./middlewares/auth";
 import passport from '../BACKEND/passport/passport-config';
 import {productRouter, protectedProductRouter} from "./routes/product";
-
+import cors from 'cors';
 
 
 
@@ -16,7 +16,12 @@ const port=8000;
 const app = express();
 const HTTP_PORT=port;
 
+const corsOptions = {
+    origin: 'http://localhost:4200',
+    optionsSuccessStatus: 200
+};
 
+app.use(cors(corsOptions));
 app.use(express.json(), Logger);
 app.use(express.urlencoded({ extended: false }));
 
@@ -42,6 +47,7 @@ app.use('/protected/user',ensureAuthenticated,protectedUserRouter);
 app.use('/protected/product', ensureAuthenticated,protectedProductRouter);
 
 
+app.use('/uploads', express.static('uploads'));
 app.get('/', (_req: Request, res: Response) => {
     return res.status(200).json('Check postman for guidance');
 });

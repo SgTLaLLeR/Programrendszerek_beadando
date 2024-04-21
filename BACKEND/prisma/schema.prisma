@@ -20,6 +20,7 @@ model Products {
   description String
   price Int
   isAvailable Boolean
+  uploadedAt DateTime
   userId String
 }
 
