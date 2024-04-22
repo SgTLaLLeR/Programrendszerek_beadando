@@ -38,7 +38,7 @@ protectedUserRouter.get('/logout', async (req: Request, res : Response, next : N
 
 protectedUserRouter.post('/profile',async (req: Request, res: Response)=>{
     console.log(req.user)
-    return res.status(HTTP_STATUS_OK).json('OK');
+    return res.status(HTTP_STATUS_OK).json(req.user);
 
 
 });

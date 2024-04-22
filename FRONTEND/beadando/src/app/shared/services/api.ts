@@ -14,16 +14,17 @@ export class ApiService {
 
   getData<T>(endpoint: string, body: any = {}): Observable<T> {
     const url = `${this.baseUrl}${endpoint}`;
-    return this.http.post<T>(url, body).pipe(
+    return this.http.post<T>(url, body  ).pipe(
       tap((data: T) => {
         console.log('Data received: ', data);
       }),
       catchError(this.handleError)
+
     );
   }
 
   private handleError(error: HttpErrorResponse) {
     console.error('An error occurred:', error);
-    return throwError('Something went wrong; please try again later.');
+    return throwError(error);
   }
 }

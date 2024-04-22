@@ -1,6 +1,8 @@
 <app-navbar></app-navbar>
-<app-products></app-products>
+<app-products *ngIf="!isLoginPage"></app-products>
+
+<router-outlet />
 <app-footer></app-footer>
 
 
-<!--<router-outlet />-->
+
