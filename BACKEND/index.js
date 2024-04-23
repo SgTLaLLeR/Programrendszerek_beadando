@@ -13,12 +13,14 @@ const auth_1 = require("./middlewares/auth");
 const passport_config_1 = __importDefault(require("../BACKEND/passport/passport-config"));
 const product_1 = require("./routes/product");
 const cors_1 = __importDefault(require("cors"));
+const http_status_codes_1 = require("./constans/http-status-codes");
 const port = 8000;
 const app = (0, express_1.default)();
 const HTTP_PORT = port;
 const corsOptions = {
     origin: 'http://localhost:4200',
-    optionsSuccessStatus: 200
+    optionsSuccessStatus: 200,
+    credentials: true
 };
 app.use((0, cors_1.default)(corsOptions));
 app.use(express_1.default.json(), log_to_console_1.Logger);
@@ -43,6 +45,14 @@ app.use('/protected/product', auth_1.ensureAuthenticated, product_1.protectedPro
 app.use('/uploads', express_1.default.static('uploads'));
 app.get('/', (_req, res) => {
     return res.status(200).json('Check postman for guidance');
+});
+app.get('/checkAuth', auth_1.ensureAuthenticated, (req, res) => {
+    if (req.isAuthenticated()) {
+        return res.status(http_status_codes_1.HTTP_STATUS_OK).send(true);
+    }
+    else {
+        return res.status(http_status_codes_1.HTTP_STATUS_UNAUTHORIZED).send(false);
+    }
 });
 process.on('SIGINT', () => {
     console.log("Received SIGINT. Shutting down gracefully...");

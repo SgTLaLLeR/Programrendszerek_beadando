@@ -12,14 +12,18 @@ export class ApiService {
 
   baseUrl = 'http://localhost:8000'
 
-  getData<T>(endpoint: string, body: any = {}): Observable<T> {
+  getData<T>(
+    endpoint: string,
+    body: any = {},
+    options: { withCredentials?: boolean } = {}
+  ): Observable<T> {
+
     const url = `${this.baseUrl}${endpoint}`;
-    return this.http.post<T>(url, body  ).pipe(
+    return this.http.post<T>(url, body, { withCredentials: options.withCredentials || false}).pipe(
       tap((data: T) => {
         console.log('Data received: ', data);
       }),
       catchError(this.handleError)
-
     );
   }
 

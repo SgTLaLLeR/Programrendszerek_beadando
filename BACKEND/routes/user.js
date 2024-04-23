@@ -78,3 +78,9 @@ userRouter.post('/findById', (req, res, next) => __awaiter(void 0, void 0, void 
         next(e);
     }
 }));
+protectedUserRouter.post('/logout', (req, res, next) => {
+    req.logout(err => {
+        next(err);
+    });
+    res.status(200).json({ message: "Logout successful" });
+});

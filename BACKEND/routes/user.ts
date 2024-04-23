@@ -52,5 +52,13 @@ userRouter.post('/findById', async (req: Request, res: Response, next : NextFunc
     }
 
 })
+protectedUserRouter.post('/logout', (req : Request, res : Response, next : NextFunction) => {
+    req.logout(err => {
+        next(err)
+    });
+    res.status(200).json({ message: "Logout successful" });
+});
+
+
 
 export { userRouter, protectedUserRouter };

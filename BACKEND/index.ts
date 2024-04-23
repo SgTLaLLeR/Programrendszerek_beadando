@@ -1,4 +1,4 @@
-import express, {Request, Response} from 'express';
+import express, {NextFunction, Request, Response} from 'express';
 import {protectedUserRouter, userRouter} from './routes/user';
 import {handleErrors} from "./middlewares/error-handler";
 import {Logger} from "./middlewares/log-to-console";
@@ -8,6 +8,7 @@ import {ensureAuthenticated} from "./middlewares/auth";
 import passport from '../BACKEND/passport/passport-config';
 import {productRouter, protectedProductRouter} from "./routes/product";
 import cors from 'cors';
+import {HTTP_STATUS_OK, HTTP_STATUS_UNAUTHORIZED} from "./constans/http-status-codes";
 
 
 
@@ -18,7 +19,8 @@ const HTTP_PORT=port;
 
 const corsOptions = {
     origin: 'http://localhost:4200',
-    optionsSuccessStatus: 200
+    optionsSuccessStatus: 200,
+    credentials: true
 };
 
 app.use(cors(corsOptions));
@@ -52,6 +54,15 @@ app.get('/', (_req: Request, res: Response) => {
     return res.status(200).json('Check postman for guidance');
 });
 
+app.get('/checkAuth',ensureAuthenticated, (req: Request, res: Response) => {
+    if(req.isAuthenticated()){
+        return res.status(HTTP_STATUS_OK).send(true);
+    }
+    else {
+        return res.status(HTTP_STATUS_UNAUTHORIZED).send(false);
+    }
+
+})
 
 
 process.on('SIGINT', () => {
