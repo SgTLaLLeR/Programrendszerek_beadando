@@ -84,3 +84,13 @@ protectedUserRouter.post('/logout', (req, res, next) => {
     });
     res.status(200).json({ message: "Logout successful" });
 });
+protectedUserRouter.post('/update', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const validData = yield (0, zod_1.zParse)(user_login_1.UserProfileDTO, req.body);
+        const result = yield userService.updateUser(validData);
+        return res.status(http_status_codes_1.HTTP_STATUS_OK).json(result);
+    }
+    catch (e) {
+        next(e);
+    }
+}));

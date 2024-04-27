@@ -54,7 +54,7 @@ app.get('/', (_req: Request, res: Response) => {
     return res.status(200).json('Check postman for guidance');
 });
 
-app.get('/checkAuth',ensureAuthenticated, (req: Request, res: Response) => {
+app.post('/checkAuth',ensureAuthenticated, (req: Request, res: Response) => {
     if(req.isAuthenticated()){
         return res.status(HTTP_STATUS_OK).send(true);
     }

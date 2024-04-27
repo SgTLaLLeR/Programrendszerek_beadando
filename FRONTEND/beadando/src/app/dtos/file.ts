@@ -8,4 +8,6 @@ export const FileDTOOutput = z.object({
   productId: z.string(),
 });
 
+
+
 export type ZFileDTOOutput = z.infer<typeof FileDTOOutput>;

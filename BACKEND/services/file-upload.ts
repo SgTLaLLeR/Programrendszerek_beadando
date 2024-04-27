@@ -1,5 +1,5 @@
 import {PrismaClient} from "@prisma/client";
-import {ZFileDTOInput} from "../dtos/file";
+import {ZFileDTOInput, ZFileDTOOutput} from "../dtos/file";
 
 
 const prisma = new PrismaClient();
@@ -13,4 +13,18 @@ export async function saveFileToDb(userId: string, file: ZFileDTOInput, productI
             productId: productId
         }
     });
+}
+
+export async function updateFile(user: any,newFile: ZFileDTOInput, imageId: string, productId : string){
+    return prisma.file.update({
+        where : {
+            id : imageId
+        },
+        data : {
+            filename: newFile.originalname,
+            path: newFile.path,
+            userId: user.id,
+            productId: productId
+        }
+    })
 }

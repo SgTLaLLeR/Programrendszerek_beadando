@@ -1,0 +1,464 @@
+{
+	"info": {
+		"_postman_id": "4eae2631-a413-4a56-a066-b168f2018373",
+		"name": "Programrendszerek beadandó",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34263444"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Public",
+					"item": [
+						{
+							"name": "Login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Proba\",\r\n    \"pw\": \"asd123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/user/login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"user",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Register",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"sgt211233@gmail.com\",\r\n    \"name\":\"Proba\",\r\n    \"pw\": \"asd123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/user/register",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"user",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getAllProduct",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/product/getAllProduct",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"product",
+										"getAllProduct"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getAllProductImage",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/product/getAllProductImage",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"product",
+										"getAllProductImage"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Filteres",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"name\":\"\",\"priceStart\":0,\"priceEnd\":87783,\"dateOrder\":\"\",\"priceOrder\":\"asc\"}\r\n\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/product/getFilteredProduct",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"product",
+										"getFilteredProduct"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Protected",
+					"item": [
+						{
+							"name": "Profile",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/protected/user/profile",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"protected",
+										"user",
+										"profile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Product",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/C:/Users/Lali/Desktop/Minden/main-qimg-049f4c7b7018c33b0745c3ff7975a1d6.bmp"
+										},
+										{
+											"key": "name",
+											"value": "Szarvas marha eladó",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "description",
+											"value": "asd",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "price",
+											"value": "{{price}}",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "isAvailable",
+											"value": "{{isAvailable}}",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "userId",
+											"value": "asdqweasd",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/protected/product/createProduct",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"protected",
+										"product",
+										"createProduct"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Logout",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/protected/user/logout",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"protected",
+										"user",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"661bf057d5e825f9e81ebea5\",\r\n    \"email\": \"sgtlaller97@gmail.com\",\r\n    \"name\": \"Lali\",\r\n    \"pw\": \"$2b$10$rYRD2eKzA2sfYa7hrQ9b9OY/BBbJHd26TP.Q6pSdZu2k6JsmBzGGa\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/protected/user/update",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"protected",
+										"user",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getProductByUserId",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/protected/product/getProductByUserId",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"protected",
+										"product",
+										"getProductByUserId"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buy Product",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"id\": \"662a86ece0305c9eaec0aa04\",\r\n        \"name\": \"Szerkesztve1\",\r\n        \"description\": \"Na ez\",\r\n        \"price\": 1900,\r\n        \"isAvailable\": true,\r\n        \"uploadedAt\": \"2024-04-25T16:38:03.998Z\",\r\n        \"userId\": \"66294f5929d02d9bd0c78609\"\r\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/protected/product/buyProduct",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"protected",
+										"product",
+										"buyProduct"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "purchase history",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/protected/product/purchaseHistory",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"protected",
+										"product",
+										"purchaseHistory"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Tesztre",
+					"protocolProfileBehavior": {
+						"followRedirects": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Lali/Downloads/anyrgb.com.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/upload",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"upload"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth Ellenőrzés",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/checkAuth",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"checkAuth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findUserById",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"661bf057d5e825f9e81ebea5\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/user/findById",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user",
+						"findById"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://localhost:8000",
+			"type": "string"
+		},
+		{
+			"key": "isAvailable",
+			"value": "true",
+			"type": "string"
+		},
+		{
+			"key": "price",
+			"value": "12213456",
+			"type": "string"
+		}
+	]
+}

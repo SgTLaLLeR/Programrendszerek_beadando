@@ -31,3 +31,12 @@ model file {
   userId String
   productId String?
 }
+
+model purchaseHistory {
+  id  String  @id @default(auto()) @map("_id") @db.ObjectId
+  productId  String
+  userId String
+  productName String
+  productPrice Int
+  purchaseDate DateTime
+}

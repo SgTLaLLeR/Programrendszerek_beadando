@@ -21,7 +21,6 @@ export class ApiService {
     const url = `${this.baseUrl}${endpoint}`;
     return this.http.post<T>(url, body, { withCredentials: options.withCredentials || false}).pipe(
       tap((data: T) => {
-        console.log('Data received: ', data);
       }),
       catchError(this.handleError)
     );

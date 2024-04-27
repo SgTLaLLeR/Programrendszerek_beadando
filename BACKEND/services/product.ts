@@ -1,4 +1,10 @@
-import {ZProductDTOInput, ZProductFilterDTOInput} from "../dtos/product";
+import {
+    ProductDTOFormData,
+    ProductDTOOutput, ZProductDTOFormData,
+    ZProductDTOInput,
+    ZProductDTOOutput,
+    ZProductFilterDTOInput
+} from "../dtos/product";
 import {PrismaClient} from "@prisma/client";
 
 
@@ -9,8 +15,8 @@ export async function getProducts() {
 
 }
 
-export async function getProductsByUserId(id : string){
-    return prisma.products.findFirst({where:{id:id}});
+export async function getProductsByUserId(user : any){
+    return prisma.products.findMany({where:{userId:user.id}});
 }
 
 export async function createProduct(product : ZProductDTOInput){
@@ -37,6 +43,13 @@ export async function getFilteredProducts(filter: ZProductFilterDTOInput) {
         query.where['name'] = { contains: filter.name };
     }
 
+
+
+    if (filter.isAvailable) {
+        query.where = query.where || {};
+        query.where['isAvailable'] = { equals: true };
+    }
+
     if (filter.priceStart !== undefined || filter.priceEnd !== undefined) {
         query.where = query.where || {};
         query.where['price'] = {};
@@ -57,6 +70,69 @@ export async function getFilteredProducts(filter: ZProductFilterDTOInput) {
         query.orderBy = query.orderBy || [];
         query.orderBy.push({ price: filter.priceOrder === 'asc' ? 'asc' : 'desc' });
     }
+    console.log(query);
 
     return prisma.products.findMany(query);
+}
+
+export async function deleteProductById(id : string){
+    return prisma.products.delete({where:{id:id}});
+
+}
+
+export async function updateProduct(product: ZProductDTOFormData) {
+    return prisma.products.update({
+        where: {
+            id: product.id
+        },
+        data:{
+            name: product.name,
+            price: product.price,
+            description : product.description,
+        }
+    });
+}
+
+export async function updateAvailableProducts(products : ZProductDTOFormData){
+    return prisma.products.update({
+        where : {
+            id : products.id,
+        },
+        data : {
+            isAvailable : products.isAvailable,
+        }
+    })
+}
+
+export async function buyProduct(product: ZProductDTOOutput, user: any){
+    if(user.id === product.userId){
+        throw new Error('You cannot buy your own product');
+    }
+
+    await prisma.products.update({
+        where: {
+            id: product.id,
+        },
+        data: {
+            isAvailable: false
+        }
+    });
+
+    return prisma.purchaseHistory.create({
+        data: {
+            productId: product.id,
+            userId: user.id,
+            productName: product.name,
+            productPrice: product.price,
+            purchaseDate: new Date()
+        }
+    });
+}
+
+export async function purchaseHistory(user : any ){
+    return prisma.purchaseHistory.findMany({
+        where : {
+            userId: user.id
+        }
+    })
 }

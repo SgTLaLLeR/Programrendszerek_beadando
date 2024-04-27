@@ -1,7 +1,7 @@
 import express, {NextFunction, Request, Response} from 'express';
 import {zParse} from "../services/zod";
 import * as userService from "../services/user";
-import {UserRegisterDTOInput} from "../dtos/user-login";
+import {UserProfileDTO, UserRegisterDTOInput} from "../dtos/user-login";
 import {HTTP_STATUS_OK} from "../constans/http-status-codes";
 import passport from "../passport/passport-config";
 
@@ -59,6 +59,16 @@ protectedUserRouter.post('/logout', (req : Request, res : Response, next : NextF
     res.status(200).json({ message: "Logout successful" });
 });
 
+protectedUserRouter.post('/update', async (req: Request, res: Response, next : NextFunction) =>{
+    try {
+        const validData = await zParse(UserProfileDTO, req.body);
+        const result = await userService.updateUser(validData);
+        return res.status(HTTP_STATUS_OK).json(result);
+
+    }catch (e){
+        next(e)
+    }
+});
 
 
 export { userRouter, protectedUserRouter };

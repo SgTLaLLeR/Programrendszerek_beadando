@@ -40,7 +40,7 @@ export const UserProfileDTO = z.object({
     .string()
     .min(1, 'A jelszó hossza minimum 1 karakter kell legyen!')
     .max(100, 'A jelszó hossza maximum 100 karakter lehet!')
-    .describe('Password'),
+    .describe('Password').optional(),
 })
 
 

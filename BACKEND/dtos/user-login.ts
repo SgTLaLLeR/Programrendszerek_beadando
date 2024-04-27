@@ -32,6 +32,23 @@ export const UserLoginDTOSucces= z.object({
     message: z.string()
 })
 
+export const UserProfileDTO = z.object({
+    id: z.string(),
+    email: z.string().min(1).max(100).describe('Email address'),
+    name: z
+        .string()
+        .min(1, 'A felhasználónév hossza minimum 6 karakter kell legyen!')
+        .max(100, 'A felhasználónév hossza maximum 100 karakter lehet!')
+        .describe('Username'),
+    pw: z
+        .string()
+        .min(1, 'A jelszó hossza minimum 1 karakter kell legyen!')
+        .max(100, 'A jelszó hossza maximum 100 karakter lehet!')
+        .describe('Password').optional(),
+})
+
 export type ZUserLoginDTOInput = z.infer<typeof UserLoginDTOInput>;
 export type ZUserRegisterDTOInput = z.infer<typeof UserRegisterDTOInput>
+export type ZUserProfileDTO = z.infer<typeof UserProfileDTO>
+
 

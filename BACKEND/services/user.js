@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.findUserById = exports.registerHelper = exports.registerUser = exports.loginUser = void 0;
+exports.updateUser = exports.findUserById = exports.registerHelper = exports.registerUser = exports.loginUser = void 0;
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const client_1 = require("@prisma/client");
 const zod_1 = require("./zod");
@@ -97,3 +97,22 @@ function findUserById(id) {
     });
 }
 exports.findUserById = findUserById;
+function updateUser(user) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let pw = user.pw;
+        if (user.pw) {
+            pw = yield bcrypt_1.default.hash(user.pw, 10);
+        }
+        return prisma.users.update({
+            where: {
+                id: user.id,
+            },
+            data: {
+                name: user.name,
+                email: user.email,
+                password: pw
+            },
+        });
+    });
+}
+exports.updateUser = updateUser;

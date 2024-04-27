@@ -2,9 +2,7 @@ import bcrypt from 'bcrypt';
 import {PrismaClient} from '@prisma/client'
 import {zParse} from "./zod";
 
-import {
-    ZUserLoginDTOInput, UserLoginDTOSucces, ZUserRegisterDTOInput, UserLoginDTOInput,
-} from "../dtos/user-login";
+import {UserLoginDTOSucces, ZUserLoginDTOInput, ZUserProfileDTO, ZUserRegisterDTOInput,} from "../dtos/user-login";
 import {UserNotFound} from "../errors/user-not-found";
 import {IncorrectPassword} from "../errors/incorrect-password";
 import {EmailAlreadyExist} from "../errors/email-already-exist";
@@ -90,4 +88,21 @@ export async function  findUserById(id : string){
         return user;
     }
     return UserNotFound;
+}
+
+export async function updateUser(user : ZUserProfileDTO){
+    let pw = user.pw
+    if(user.pw){
+        pw = await bcrypt.hash(user.pw, 10);
+    }
+    return prisma.users.update({
+        where: {
+            id: user.id,
+        },
+        data: {
+            name : user.name,
+            email : user.email,
+            password : pw
+        },
+    });
 }

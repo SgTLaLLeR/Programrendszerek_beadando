@@ -14,8 +14,9 @@ export const ProductDTOOutput = z.object({
     description: z.string(),
     price: z.number(),
     isAvailable: z.boolean(),
-    uploadedAt: z.date(),
-    userId: z.string()
+    userId: z.string(),
+    imageId: z.string().optional()
+
 });
 
 export const ProductFilterDTOInput =z.object({
@@ -23,9 +24,22 @@ export const ProductFilterDTOInput =z.object({
     priceStart: z.number().optional(),
     priceEnd: z.number().optional(),
     dateOrder: z.string().optional(),
-    priceOrder: z.string().optional()
+    priceOrder: z.string().optional(),
+    isAvailable: z.boolean().optional()
+});
+
+export const ProductDTOFormData = z.object({
+    id: z.string(),
+    name: z.string(),
+    description: z.string(),
+    price: z.number(),
+    isAvailable: z.boolean(),
+
+    imageId: z.string().optional()
+
 });
 
 export type ZProductDTOInput = z.infer<typeof ProductDTOInput>;
 export type ZProductDTOOutput = z.infer<typeof ProductDTOOutput>;
 export type ZProductFilterDTOInput = z.infer<typeof ProductFilterDTOInput>;
+export type ZProductDTOFormData = z.infer<typeof ProductDTOFormData>;

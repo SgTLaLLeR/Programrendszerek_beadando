@@ -46,7 +46,7 @@ app.use('/uploads', express_1.default.static('uploads'));
 app.get('/', (_req, res) => {
     return res.status(200).json('Check postman for guidance');
 });
-app.get('/checkAuth', auth_1.ensureAuthenticated, (req, res) => {
+app.post('/checkAuth', auth_1.ensureAuthenticated, (req, res) => {
     if (req.isAuthenticated()) {
         return res.status(http_status_codes_1.HTTP_STATUS_OK).send(true);
     }
