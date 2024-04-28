@@ -1,0 +1,48 @@
+<div class="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-md">
+    <div class="bg-white py-8 px-10 shadow sm:rounded-lg">
+      <h2 class="text-center text-4xl font-extrabold text-gray-900">
+        Bejelentkezés
+      </h2>
+      <form class="mt-8 space-y-6" (ngSubmit)="onSubmit()" #loginForm="ngForm">
+        <input type="hidden" name="remember" value="true">
+        <div class="rounded-md shadow-sm -space-y-px">
+          <div>
+            <label for="name" class="sr-only">Név</label>
+            <input id="name" name="name" type="text" autocomplete="name"   required class="appearance-none rounded-none relative block w-full px-3 py-4 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-lg" placeholder="Név" [(ngModel)]="user.name">
+          </div>
+          <div>
+            <label for="password" class="sr-only">Jelszó</label>
+            <input id="password" name="password" type="password" autocomplete="current-password" required class="appearance-none rounded-none relative block w-full px-3 py-4 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-lg" placeholder="Jelszó" [(ngModel)]="user.pw">          </div>
+        </div>
+
+        <div class="flex items-center justify-between mt-6">
+          <div class="flex items-center">
+            <input id="remember_me" name="remember_me" type="checkbox" class="h-6 w-6 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+            <label for="remember_me" class="ml-2 block text-lg text-gray-900">
+              Emlékezzen rám
+            </label>
+          </div>
+
+          <div class="text-lg">
+            <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
+              Elfelejtette a jelszavát?
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <button type="submit" class="w-full flex justify-center py-4 px-6 border border-transparent text-lg font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            Bejelentkezés
+          </button>
+        </div>
+      </form>
+      <div class="mt-6 text-center text-lg">
+        Nincs még fiókod?
+        <a href="/register" class="font-medium text-indigo-600 hover:text-indigo-500">
+          Hozz létre egyet!
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

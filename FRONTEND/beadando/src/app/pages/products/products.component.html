@@ -1,0 +1,62 @@
+<div class="flex flex-col md:flex-row">
+  <!-- Szűrő sáv -->
+  <div class="w-full md:w-1/4 p-4">
+    <h2 class="text-lg font-semibold mb-4">Szűrők</h2>
+    <!-- Név alapján szűrés -->
+
+    <input type="text" class="w-full p-2 mb-4 border rounded" placeholder="Név alapján szűrés..." [(ngModel)]="nameFilter" (input)="applyNameFilter()">
+    <!-- Ár alapján szűrés -->
+    <div class="mb-4">
+      <label class="block text-sm font-medium">Ár</label>
+      <input type="number" class="w-full p-2 mb-4 border rounded" placeholder="Min érték" [(ngModel)]="sliderStart" (input)="updateSlider()">
+      <mat-slider min="0" max="100000" [(ngModel)]="sliderStart" (input)="applyPriceFilter()">
+        <input matSliderStartThumb [(ngModel)]="sliderStart">
+        <input matSliderEndThumb [(ngModel)]="sliderEnd">
+      </mat-slider>
+      <input type="number" class="w-full p-2 mb-4 border rounded" placeholder="Max érték" [(ngModel)]="sliderEnd" (input)="updateSlider()">
+
+    </div>
+    <!-- Dátum szerinti rendezés -->
+    <h2 class="text-lg font-semibold mb-4">Rendezés</h2>
+    <div class="flex items-center">
+
+      <label class="block text-sm font-medium">Dátum szerinti rendezés</label>
+      <button class="ml-2 sort-button" (click)="toggleSortOrderDate()">
+        <i class="{{ sortOrderDate === 'asc' ? 'fa-solid fa-arrow-up-wide-short' : 'fa-solid fa-arrow-down-wide-short' }}"></i>
+      </button>
+    </div>
+    <div class="flex items-center">
+      <label class="block text-sm font-medium">Ár szerinti rendezés</label>
+      <button class="ml-2 sort-button" (click)="toggleSortOrderPrice()">
+        <i class="{{ sortOrderPrice === 'asc' ? 'fa-solid fa-arrow-up-wide-short' : 'fa-solid fa-arrow-down-wide-short' }}"></i>
+      </button>
+    </div>
+    <div class="flex items-center mt-4">
+      <label class="block text-sm font-medium mr-2">Csak elérhető termékek keresése</label>
+      <input type="checkbox" [(ngModel)]="isAvailable" (click)="applyAvailabilityFilter()">
+    </div>
+  </div>
+
+  <!-- Elemek listázása --><div class="w-full md:w-3/4 p-4 flex flex-wrap">
+  <ng-container *ngIf="products.length > 0; else noResults">
+    <!-- Példa kártya elem -->
+    <div class="w-full md:w-1/3 p-2 " *ngFor="let product of products" [ngClass]="{'unavailable-product': !product.isAvailable}">
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <img [src]="'http://localhost:8000/' + product.image" alt="Kép" class="w-full object-cover" style="height: 300px;" width="300" height="200">
+        <div class="p-4">
+          <h3 class="text-lg font-semibold mb-2">{{product.name}}</h3>
+          <p class="text-gray-700">{{product.price}} Ft</p>
+          <p *ngIf="!product.isAvailable" class="text-sm text-red-500 font-semibold">Nem elérhető</p>
+          <p class="text-gray-700">Feltöltés dátuma : {{product.uploadedAt | date:'yyyy-MM-dd'}}</p>
+          <button *ngIf="product.isAvailable && isLoggedIn()" class="mt-4 px-4 py-2 bg-blue-500 text-white font-semibold rounded-md shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75" (click)="buy(product)">Vásárlás</button>
+
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #noResults>
+    <div class="text-gray-700 text-center mt-8 text-3xl">Nincs találat</div>
+  </ng-template>
+</div>
+
+</div>

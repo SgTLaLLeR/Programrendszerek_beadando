@@ -1,0 +1,55 @@
+<div class="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-md">
+    <div class="bg-white py-8 px-10 shadow sm:rounded-lg">
+      <h2 class="text-center text-4xl font-extrabold text-gray-900 mb-8">
+        Profil
+      </h2>
+      <div class="mb-4" *ngIf="editMode.email">
+        <label for="email" class="block text-lg font-medium text-gray-700">Email cím</label>
+        <input id="email" name="email" type="email" autocomplete="email" required [(ngModel)]="user.email" class="appearance-none rounded-none relative block w-full px-3 py-4 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-lg" placeholder="Email cím">
+      </div>
+      <div class="mb-4" *ngIf="!editMode.email">
+        <label for="email" class="block text-lg font-medium text-gray-700">Email cím</label>
+        <p *ngIf="!editMode.email" id="email1" class="mt-1 text-lg text-gray-900">{{user.email}}</p>
+        <button class="mt-2 text-indigo-600 hover:text-indigo-500 focus:outline-none" (click)="toggleEditMode('email')" *ngIf="!editMode.email">
+          Szerkesztés
+        </button>
+      </div>
+      <div class="mb-4" *ngIf="editMode.name">
+        <label for="name" class="block text-lg font-medium text-gray-700">Név</label>
+        <input id="name" name="name" type="text" autocomplete="name" required [(ngModel)]="user.name" class="appearance-none rounded-none relative block w-full px-3 py-4 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-lg" placeholder="Név">
+      </div>
+      <div class="mb-4" *ngIf="!editMode.name">
+        <label for="name" class="block text-lg font-medium text-gray-700">Név</label>
+        <p  id="name1" class="mt-1 text-lg text-gray-900">{{user.name}}</p>
+        <button class="mt-2 text-indigo-600 hover:text-indigo-500 focus:outline-none" (click)="toggleEditMode('name')" *ngIf="!editMode.name">
+          Szerkesztés
+        </button>
+      </div>
+      <div class="mb-4" *ngIf="editMode.password">
+        <label for="pw" class="block text-lg font-medium text-gray-700">Jelszó</label>
+        <input id="pw" name="pw" type="password" autocomplete="new-password" required [(ngModel)]="user.pw" class="appearance-none rounded-none relative block w-full px-3 py-4 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-lg" placeholder="Jelszó">
+
+      </div>
+      <div class="mb-4" *ngIf="!editMode.password">
+        <label for="pw" class="block text-lg font-medium text-gray-700">Jelszó</label>
+        <button class="mt-2 text-indigo-600 hover:text-indigo-500 focus:outline-none" (click)="toggleEditMode('password')">
+          Szerkesztés
+        </button>
+      </div>
+      <div class="flex justify-between mt-4" *ngIf="editMode.password || editMode.email || editMode.name">
+        <button class="px-4 py-2 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75" (click)="saveChanges()">
+          Mentés
+        </button>
+        <button class="px-4 py-2 bg-red-600 text-white font-semibold rounded-lg shadow-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-75" (click)="cancelEdit()">
+          Mégse
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="flex justify-center mt-4">
+    <button routerLink="/purchaseHistory" class="px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
+      Vásárlásaim
+    </button>
+  </div>
+</div>

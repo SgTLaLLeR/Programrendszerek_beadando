@@ -1,0 +1,117 @@
+[{
+  "_id": {
+    "$oid": "662dfe7b4d24fe1b38143ebf"
+  },
+  "name": "Videókártya",
+  "description": "Kihasználatlanság miatt eladó",
+  "price": 90000,
+  "isAvailable": true,
+  "uploadedAt": {
+    "$date": "2024-04-28T07:44:59.909Z"
+  },
+  "userId": "662dfe324d24fe1b38143ebe"
+},
+{
+  "_id": {
+    "$oid": "662dfe9e4d24fe1b38143ec2"
+  },
+  "name": "Targonca torony",
+  "description": "Eladó a képen látható targonca torony",
+  "price": 750000,
+  "isAvailable": true,
+  "uploadedAt": {
+    "$date": "2024-04-28T07:45:34.863Z"
+  },
+  "userId": "662dfe324d24fe1b38143ebe"
+},
+{
+  "_id": {
+    "$oid": "662dfef84d24fe1b38143ec4"
+  },
+  "name": "Antik telefon",
+  "description": "1890-es gyártású angol antik telefon",
+  "price": 25000,
+  "isAvailable": true,
+  "uploadedAt": {
+    "$date": "2024-04-28T07:47:04.000Z"
+  },
+  "userId": "662dfe324d24fe1b38143ebe"
+},
+{
+  "_id": {
+    "$oid": "662dff0d4d24fe1b38143ec6"
+  },
+  "name": "Gyerek játék",
+  "description": "3 éves kortól",
+  "price": 5000,
+  "isAvailable": true,
+  "uploadedAt": {
+    "$date": "2024-04-28T07:47:25.717Z"
+  },
+  "userId": "662dfe324d24fe1b38143ebe"
+},
+{
+  "_id": {
+    "$oid": "662dff364d24fe1b38143ec8"
+  },
+  "name": "Vezetékes telefon",
+  "description": "Működik",
+  "price": 9000,
+  "isAvailable": true,
+  "uploadedAt": {
+    "$date": "2024-04-28T07:48:06.627Z"
+  },
+  "userId": "662dfe324d24fe1b38143ebe"
+},
+{
+  "_id": {
+    "$oid": "662dff894d24fe1b38143eca"
+  },
+  "name": "Zöldborsó",
+  "description": "Házi, vegyszer mentes\r\nAz ára /kg-ra értendő",
+  "price": 500,
+  "isAvailable": true,
+  "uploadedAt": {
+    "$date": "2024-04-28T07:49:29.579Z"
+  },
+  "userId": "662dfe324d24fe1b38143ebe"
+},
+{
+  "_id": {
+    "$oid": "662dff9c4d24fe1b38143ecc"
+  },
+  "name": "Retek",
+  "description": "Házi retek",
+  "price": 900,
+  "isAvailable": true,
+  "uploadedAt": {
+    "$date": "2024-04-28T07:49:48.728Z"
+  },
+  "userId": "662dfe324d24fe1b38143ebe"
+},
+{
+  "_id": {
+    "$oid": "662e00144d24fe1b38143ece"
+  },
+  "name": "LG monitor",
+  "description": "bontatlan ",
+  "price": 55000,
+  "isAvailable": true,
+  "uploadedAt": {
+    "$date": "2024-04-28T07:51:48.298Z"
+  },
+  "userId": "662dfe324d24fe1b38143ebe"
+},
+{
+  "_id": {
+    "$oid": "662e00624d24fe1b38143ed0"
+  },
+  "name": "laptop",
+  "description": "Eladó a laptopom, másfél évet használtam. Hibátlanul működik",
+  "price": 99000,
+  "isAvailable": true,
+  "uploadedAt": {
+    "$date": "2024-04-28T07:53:06.213Z"
+  },
+  "userId": "662dfe324d24fe1b38143ebe"
+}]

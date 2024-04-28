@@ -1,0 +1,43 @@
+<div class="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-md">
+    <div class="bg-white py-8 px-10 shadow sm:rounded-lg">
+      <h2 class="text-center text-4xl font-extrabold text-gray-900">
+        Regisztráció
+      </h2>
+      <!-- Form hozzáadása -->
+      <form class="mt-8 space-y-6" (ngSubmit)="onSubmit()" method="POST">
+        <!-- Az ngModel direktíva segítségével kötjük össze a bemeneti mezőket a registrationData modellhez -->
+        <div class="rounded-md shadow-sm -space-y-px">
+          <div>
+            <label for="email" class="sr-only">Email cím</label>
+            <input id="email" name="email" type="email" autocomplete="email" required [(ngModel)]="registrationData.email" class="appearance-none rounded-none relative block w-full px-3 py-4 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-lg" placeholder="Email cím">
+          </div>
+          <div>
+            <label for="name" class="sr-only">Név</label>
+            <input id="name" name="name" type="text" autocomplete="name" required [(ngModel)]="registrationData.name" class="appearance-none rounded-none relative block w-full px-3 py-4 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-lg" placeholder="Név">
+          </div>
+          <div>
+            <label for="password" class="sr-only">Jelszó</label>
+            <input id="password" name="password" type="password" autocomplete="current-password" required [(ngModel)]="registrationData.pw" class="appearance-none rounded-none relative block w-full px-3 py-4 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-lg" placeholder="Jelszó">
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between mt-6">
+          <!-- Regisztráció hivatkozás -->
+          <div class="text-lg">
+            <a routerLink="/login" class="font-medium text-indigo-600 hover:text-indigo-500">
+              Van már fiókod? Kattints ide a bejelentkezéshez
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <!-- A submit esemény hatására meghívódik az onSubmit() metódus -->
+          <button type="submit" class="w-full flex justify-center py-4 px-6 border border-transparent text-lg font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            Regisztráció
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

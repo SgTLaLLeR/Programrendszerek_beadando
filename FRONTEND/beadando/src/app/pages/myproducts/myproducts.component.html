@@ -1,0 +1,52 @@
+<div class="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+  <button routerLink="/newProduct" class="mx-auto mb-4 px-6 py-3 bg-indigo-600 text-white font-semibold rounded-md shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75">
+    Új hirdetés létrehozása
+  </button>
+
+  <ng-container *ngIf="products.length > 0; else noResults">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div *ngFor="let product of products" class="my-4" [ngClass]="{'unavailable-product': !product.isAvailable}">
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+          <img [src]="'http://localhost:8000/' + product.image" alt="Kép" class="w-full object-cover" style="height: 300px;" width="300" height="200">
+          <div class="p-4">
+            <h3 class="text-lg font-semibold mb-2">{{ product.name }}</h3>
+            <p class="text-gray-700">{{ product.price }} Ft</p>
+            <p class="text-gray-700 text-lg">{{ product.description }}</p>
+<!--            <p class="text-gray-700">{{ product.uploadedAt }}</p>-->
+            <p *ngIf="!product.isAvailable" class="text-sm text-red-500 font-semibold">Nem elérhető</p>
+
+            <!-- Szerkesztés input mezők és képfeltöltő -->
+            <div *ngIf="editMode === product.id" class="mt-4 edit-mode">
+              <input type="text" [(ngModel)]="product.name" placeholder="Név" class="border rounded-md px-3 py-2">
+              <input type="number" [(ngModel)]="product.price" placeholder="Ár" class="border rounded-md px-3 py-2 mt-2">
+              <input type="file" (change)="onFileSelected($event)" class="mt-2">
+              <textarea [(ngModel)]="product.description" placeholder="Leírás" class="border rounded-md px-3 py-2 mt-2"></textarea>
+              <input type="hidden" [(ngModel)]="product.imageId" name="imageId">
+
+
+              <button (click)="updateProduct(product)" class="px-4 py-2 bg-green-600 text-white font-semibold rounded-md shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-75 mt-2">Mentés</button>
+              <button (click)="cancelEdit()" class="px-4 py-2 bg-gray-600 text-white font-semibold rounded-md shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75 mt-2 ml-2">Mégse</button>
+            </div>
+
+            <!-- Szerkesztés gomb -->
+            <button (click)="startEdit(product.id)" *ngIf="!editMode || editMode !== product.id" class="px-4 py-2 bg-indigo-600 text-white font-semibold rounded-md shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75 mt-4">Szerkesztés</button>
+            <button *ngIf="!editMode || editMode !== product.id" (click)="deleteProduct(product.id)" class="px-4 py-2 bg-red-600 text-white font-semibold rounded-md shadow-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-75 mt-4 ml-2">Törlés</button>
+
+            <button *ngIf="!editMode || editMode !== product.id"
+                    (click)="suspendProduct(product)"
+                    [ngClass]="{'bg-yellow-600': product.isAvailable, 'bg-green-600': !product.isAvailable}"
+                    class="px-4 py-2 text-white font-semibold rounded-md shadow-md hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-opacity-75 mt-4 ml-2">
+              {{ product.isAvailable ? 'Felfüggesztés' : 'Újra elérhető' }}
+            </button>          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #noResults>
+    <div class="text-center text-gray-500">
+      Nincs jelenleg hirdetésed.
+    </div>
+  </ng-template>
+
+</div>

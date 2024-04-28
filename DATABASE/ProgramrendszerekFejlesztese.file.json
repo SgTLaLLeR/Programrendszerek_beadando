@@ -1,0 +1,81 @@
+[{
+  "_id": {
+    "$oid": "662dfe7c4d24fe1b38143ec1"
+  },
+  "filename": "1053647718.asus-geforce-rtx-4090-oc-24gb-gddr6x-rog-strix-rtx4090-o24g-gaming.jpg",
+  "path": "uploads\\609a2fd0d78b3d0348c963a29ed7a4d6",
+  "userId": "662dfe324d24fe1b38143ebe",
+  "productId": "662dfe7b4d24fe1b38143ebf"
+},
+{
+  "_id": {
+    "$oid": "662dfe9e4d24fe1b38143ec3"
+  },
+  "filename": "337815991_6357745397577227_6165654570715617692_n.jpg",
+  "path": "uploads\\12f8e3c6206933d7ea21d5c3ff1480e7",
+  "userId": "662dfe324d24fe1b38143ebe",
+  "productId": "662dfe9e4d24fe1b38143ec2"
+},
+{
+  "_id": {
+    "$oid": "662dfef84d24fe1b38143ec5"
+  },
+  "filename": "Siemens_and_Halske_Telephone_with_a_rotary_dial_1910_cropped.jpg",
+  "path": "uploads\\6e7f5f284be7842671c0de6a5ba6565f",
+  "userId": "662dfe324d24fe1b38143ebe",
+  "productId": "662dfef84d24fe1b38143ec4"
+},
+{
+  "_id": {
+    "$oid": "662dff0d4d24fe1b38143ec7"
+  },
+  "filename": "fisher-price-fecsego-telefon-2.jpg",
+  "path": "uploads\\8fda88c002153575595af102a549643d",
+  "userId": "662dfe324d24fe1b38143ebe",
+  "productId": "662dff0d4d24fe1b38143ec6"
+},
+{
+  "_id": {
+    "$oid": "662dff364d24fe1b38143ec9"
+  },
+  "filename": "496811-7kfb1.jpg",
+  "path": "uploads\\6d42b276db7c1ddd504dd40fe33d80c2",
+  "userId": "662dfe324d24fe1b38143ebe",
+  "productId": "662dff364d24fe1b38143ec8"
+},
+{
+  "_id": {
+    "$oid": "662dff894d24fe1b38143ecb"
+  },
+  "filename": "zoldborso.jpg",
+  "path": "uploads\\05bb03ecfe392966171616c65a3a50f5",
+  "userId": "662dfe324d24fe1b38143ebe",
+  "productId": "662dff894d24fe1b38143eca"
+},
+{
+  "_id": {
+    "$oid": "662dff9c4d24fe1b38143ecd"
+  },
+  "filename": "24139-1576505636703.webp",
+  "path": "uploads\\c39ddfba3fbf3306b46cc14b7b437cc1",
+  "userId": "662dfe324d24fe1b38143ebe",
+  "productId": "662dff9c4d24fe1b38143ecc"
+},
+{
+  "_id": {
+    "$oid": "662e00144d24fe1b38143ecf"
+  },
+  "filename": "images.jpg",
+  "path": "uploads\\8b1be9ae5df22ea65ef147ef3b10f2cc",
+  "userId": "662dfe324d24fe1b38143ebe",
+  "productId": "662e00144d24fe1b38143ece"
+},
+{
+  "_id": {
+    "$oid": "662e00624d24fe1b38143ed1"
+  },
+  "filename": "matebookd16-2024-kv.jpg",
+  "path": "uploads\\f4b0367ab7ba3c4a7042356b7c5f1c04",
+  "userId": "662dfe324d24fe1b38143ebe",
+  "productId": "662e00624d24fe1b38143ed0"
+}]
